@@ -1,0 +1,5 @@
+Python==3.12.6 (time et random sont probablement des libraires de base avec Python)
+paho-mqtt==1.6.1
+wmi==1.4.9
+psutil==5.9.8
+paho-mqtt==1.6.1
