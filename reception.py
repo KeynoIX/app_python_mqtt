@@ -5,6 +5,8 @@ from paho.mqtt import client as mqtt_client
 # --------------------------------------------------
 
 broker = 'test.mosquitto.org'
+login = ''
+password = ''
 port = 1883
 topic = "/foo"
 # generate client ID with pub prefix randomly
@@ -20,6 +22,7 @@ def connect_mqtt() -> mqtt_client:
             print("Failed to connect, return code %d\n", rc)
 
     client = mqtt_client.Client(client_id)
+    client.username_pw_set(login, password)
     client.on_connect = on_connect
     client.connect(broker, port)
     return client
@@ -45,5 +48,7 @@ def run():
 
 if __name__ == '__main__':
     run()
+
+# --------------------------------------------------
 
 # --------------------------------------------------
