@@ -1,0 +1,23 @@
+import psutil
+
+def get_cpu_temperature():
+    # Obtenir les informations du capteur thermique via psutil
+    try:
+        temp_info = psutil.sensors_temperatures()
+        
+        if not temp_info:
+            print("Aucune information de température disponible.")
+            return None
+
+        # Filtrer les températures CPU
+        for name, entries in temp_info.items():
+            if "coretemp" in name.lower():
+                for entry in entries:
+                    print(f"{entry.label or 'CPU'} Temperature: {entry.current}°C")
+                    return entry.current
+
+    except Exception as e:
+        print(f"Erreur lors de la récupération de la température: {e}")
+        return None
+
+get_cpu_temperature()
