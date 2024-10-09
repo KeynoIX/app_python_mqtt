@@ -8,8 +8,8 @@ from paho.mqtt import client as mqtt_client
 # --------------------------------------------------
 
 broker = 'test.mosquitto.org'
-login = ""
-password = ""
+login = ''
+password = ''
 port = 1883
 topic = "/foo"
 client_id = f'python-mqtt-{random.randint(0, 1000)}'
@@ -24,6 +24,7 @@ def connect_mqtt():
             print("Failed to connect, return code %d\n", rc)
 
     client = mqtt_client.Client(client_id)
+    client.username_pw_set(login, password)
     client.on_connect = on_connect
     client.connect(broker, port)
     return client
