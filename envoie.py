@@ -1,14 +1,17 @@
 import random
 import time
+from temp_proco_linux import get_cpu_temperature
+
 
 from paho.mqtt import client as mqtt_client
 
 # --------------------------------------------------
 
 broker = 'test.mosquitto.org'
+login = ""
+password = ""
 port = 1883
 topic = "/foo"
-# generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 1000)}'
 
 # --------------------------------------------------
@@ -29,10 +32,8 @@ def connect_mqtt():
 
 def publish(client):
     time.sleep(1)
-    
-    msg = "A single message from my computer"
+    msg = get_cpu_temperature()
     result = client.publish(topic, msg)
-    # result: [0, 1]
     status = result[0]
     if status == 0:
         print(f"Send `{msg}` to topic `{topic}`")
